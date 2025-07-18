@@ -44,24 +44,7 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .background(
-            GeometryReader { proxy in
-                Color.clear
-                    .onAppear {
-                        eventLogger.log(
-                            "Window Appeared: width=\(String(format: "%.1f", proxy.size.width)), " +
-                                "height=\(String(format: "%.1f", proxy.size.height))"
-                        )
-
-                    }
-                    .onChange(of: proxy.size) { oldSize, newSize in
-                        eventLogger.log(
-                            "Window Resized: width=\(String(format: "%.1f", proxy.size.width)), " +
-                                "height=\(String(format: "%.1f", proxy.size.height))"
-                        )
-                    }
-            }
-        )
+        .resizeMonitor(eventLogger: eventLogger)
         .environmentObject(eventLogger)
     }
 }
