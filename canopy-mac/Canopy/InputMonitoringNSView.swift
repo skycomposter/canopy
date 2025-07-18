@@ -1,11 +1,11 @@
 import SwiftUI
 
-class EventMonitoringNSView: NSView {
-    private weak var inputEventLogger: InputEventLogger?
+class InputMonitoringNSView: NSView {
+    private weak var eventLogger: EventLogger?
     private var trackingArea: NSTrackingArea?
 
-    init(frame frameRect: NSRect, inputEventLogger: InputEventLogger) {
-        self.inputEventLogger = inputEventLogger
+    init(frame frameRect: NSRect, eventLogger: EventLogger) {
+        self.eventLogger = eventLogger
         
         super.init(frame: frameRect)
 
@@ -49,7 +49,7 @@ class EventMonitoringNSView: NSView {
         let characters = event.charactersIgnoringModifiers ?? ""
         let keyCode = event.keyCode
         let modifiers = event.modifierFlags
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Key Down: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
         )
         super.keyDown(with: event) // Pass event up the responder chain if needed
@@ -59,7 +59,7 @@ class EventMonitoringNSView: NSView {
         let characters = event.charactersIgnoringModifiers ?? ""
         let keyCode = event.keyCode
         let modifiers = event.modifierFlags
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Key Up: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
         )
         super.keyUp(with: event) // Pass event up the responder chain if needed
@@ -68,7 +68,7 @@ class EventMonitoringNSView: NSView {
 
     override func flagsChanged(with event: NSEvent) {
         let modifiers = event.modifierFlags
-        inputEventLogger?.log("Flags Changed: \(modifiers)")
+        eventLogger?.log("Flags Changed: \(modifiers)")
         super.flagsChanged(with: event) // Pass event up the responder chain if needed
     }
 
@@ -76,7 +76,7 @@ class EventMonitoringNSView: NSView {
 
     override func mouseDown(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Down (Left): x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y)), clicks=\(event.clickCount)"
         )
@@ -85,7 +85,7 @@ class EventMonitoringNSView: NSView {
 
     override func mouseUp(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Up (Left): x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
@@ -94,7 +94,7 @@ class EventMonitoringNSView: NSView {
 
     override func mouseDragged(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Dragged: x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
@@ -103,7 +103,7 @@ class EventMonitoringNSView: NSView {
 
     override func rightMouseDown(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Down (Right): x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
@@ -112,7 +112,7 @@ class EventMonitoringNSView: NSView {
 
     override func rightMouseUp(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Up (Right): x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
@@ -121,7 +121,7 @@ class EventMonitoringNSView: NSView {
 
     override func otherMouseDown(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Down (Other Button \(event.buttonNumber)): " +
                 "x=\(String(format: "%.1f", location.x)), y=\(String(format: "%.1f", location.y))"
         )
@@ -130,7 +130,7 @@ class EventMonitoringNSView: NSView {
 
     override func otherMouseUp(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Up (Other Button \(event.buttonNumber)): " +
                 "x=\(String(format: "%.1f", location.x)), y=\(String(format: "%.1f", location.y))"
         )
@@ -138,7 +138,7 @@ class EventMonitoringNSView: NSView {
     }
 
     override func scrollWheel(with event: NSEvent) {
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Scroll Wheel: deltaX=\(String(format: "%.2f", event.deltaX)), " +
                 "deltaY=\(String(format: "%.2f", event.deltaY)), " +
                 "deltaZ=\(String(format: "%.2f", event.deltaZ))"
@@ -148,7 +148,7 @@ class EventMonitoringNSView: NSView {
     
     override func mouseMoved(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
-        inputEventLogger?.log(
+        eventLogger?.log(
             "Mouse Moved: x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
