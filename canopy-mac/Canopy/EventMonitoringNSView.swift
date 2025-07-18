@@ -1,7 +1,8 @@
 import SwiftUI
 
 class EventMonitoringNSView: NSView {
-    weak var eventLogger: EventLogger?
+    private weak var eventLogger: EventLogger?
+    private var trackingArea: NSTrackingArea?
 
     init(frame frameRect: NSRect, eventLogger: EventLogger) {
         self.eventLogger = eventLogger
@@ -20,6 +21,27 @@ class EventMonitoringNSView: NSView {
 
     /// Allows this view to become the first responder, which is necessary for receiving key events.
     override var acceptsFirstResponder: Bool { true }
+    
+    // MARK: - Tracking Area
+    
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        
+        if let trackingArea = trackingArea {
+            removeTrackingArea(trackingArea)
+        }
+
+        // Create a new tracking area that covers the entire view's bounds.
+        let newTrackingArea =
+            NSTrackingArea(
+                rect: bounds,
+                options: [.activeAlways, .mouseMoved],
+                owner: self,
+                userInfo: nil,
+            )
+        addTrackingArea(newTrackingArea)
+        self.trackingArea = newTrackingArea
+    }
 
     // MARK: - Keyboard Events
 
@@ -118,5 +140,14 @@ class EventMonitoringNSView: NSView {
                 "deltaZ=\(String(format: "%.2f", event.deltaZ))"
         )
         super.scrollWheel(with: event)
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        let location = convert(event.locationInWindow, from: nil)
+        eventLogger?.log(
+            "Mouse Moved: x=\(String(format: "%.1f", location.x)), " +
+                "y=\(String(format: "%.1f", location.y))"
+        )
+        super.mouseMoved(with: event)
     }
 }
