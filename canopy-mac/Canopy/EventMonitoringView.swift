@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct EventMonitoringView: NSViewRepresentable {
-    @EnvironmentObject var eventLogger: EventLogger
+    @EnvironmentObject var inputEventLogger: InputEventLogger
 
     func makeNSView(context: Context) -> some NSView {
         return EventMonitoringNSView(
             frame: .zero,
-            eventLogger: eventLogger,
+            inputEventLogger: inputEventLogger,
         )
     }
     

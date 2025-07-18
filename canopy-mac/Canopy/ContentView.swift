@@ -1,22 +1,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var eventLogger = EventLogger()
+    @StateObject private var inputEventLogger = InputEventLogger()
     
     var body: some View {
         ZStack {
             ScrollView {
                 ScrollViewReader { proxy in
                     VStack(alignment: .leading) {
-                        ForEach(eventLogger.events.indices, id: \.self) { index in
-                            Text(eventLogger.events[index])
+                        ForEach(inputEventLogger.events.indices, id: \.self) { index in
+                            Text(inputEventLogger.events[index])
                                 .font(.footnote)
                                 .id(index)
                         }
                     }
-                    .onChange(of: eventLogger.events.count) {
+                    .onChange(of: inputEventLogger.events.count) {
                         // Scroll to the bottom when a new event is added.
-                        if let lastIndex = eventLogger.events.indices.last {
+                        if let lastIndex = inputEventLogger.events.indices.last {
                             proxy.scrollTo(lastIndex, anchor: .bottom)
                         }
                     }
@@ -36,6 +36,6 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .environmentObject(eventLogger)
+        .environmentObject(inputEventLogger)
     }
 }
