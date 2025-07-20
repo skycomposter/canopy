@@ -1,6 +1,13 @@
+25.7.20
+Added a Metal renderer to gain access to a pixel buffer, with the framework handling the actual
+rendering. This took a while because I have no idea how any of this works, and had to translate
+the Win32 ideas into macOS, figure out the right framework to use (or at least _a_ framework to
+use) and get it to work with some trial and error. Gemini is my best friend.
+- Today's accomplishments: add a view that renders a pixel buffer and displays the correct colors.
+
 25.7.18
 The tutorial I'm following (check it out:
 https://www.youtube.com/playlist?list=PL7Ej6SUky135IAAR3PFCFyiVwanauRqj3) is based on Win32, but
 I'm developing on my Mac so that doesn't make iterating easy. Spent some time learning about
 SwiftUI and set up a simple app.
-- Today's achievements: display a resizable window that can receive and log input events.
+- Today's accomplishments: display a resizable window that can receive and log input events.

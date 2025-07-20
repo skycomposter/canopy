@@ -13,6 +13,9 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            MetalView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             ScrollView {
                 ScrollViewReader { proxy in
                     VStack(alignment: .leading) {
