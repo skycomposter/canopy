@@ -1,3 +1,11 @@
+25.7.21
+Got a lot done today. Got the C++ engine connected to the macOS platform code and moved the frame
+rendering code there. However I couldn't figure out a way to compile and build everything together,
+so I had to build the engine first and then copy the header and library over every time.
+I created a Makefile to make the library build easier, and then wrote a script to automatically
+update the library within the macOS project.
+- Today's accomplishments: C++-side rendering and streamlined build system.
+
 25.7.20
 Added a Metal renderer to gain access to a pixel buffer, with the framework handling the actual
 rendering. This took a while because I have no idea how any of this works, and had to translate

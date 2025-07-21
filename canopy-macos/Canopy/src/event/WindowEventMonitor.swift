@@ -1,12 +1,12 @@
 import SwiftUI
 
+/// A class responsible for listening for and responding to window-related events.
 class WindowEventMonitor: ObservableObject {
     private var eventLogger: EventLogger
     
     init(eventLogger: EventLogger) {
         self.eventLogger = eventLogger
 
-        // Window closing.
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleWindowWillClose),
@@ -26,6 +26,10 @@ class WindowEventMonitor: ObservableObject {
     }
 }
 
+/// A view modifier with the responsibility of capturing and responding to changes in view size.
+///
+/// Assumes that the view is full size, and treats the changes in its dimensions as changes to the
+/// window itself.
 struct ResizeMonitor: ViewModifier {
     private var eventLogger: EventLogger
     
@@ -57,6 +61,7 @@ struct ResizeMonitor: ViewModifier {
 }
 
 extension View {
+    /// Simple extension to add a resize monitoring to a view.
     func resizeMonitor(eventLogger: EventLogger) -> some View {
         self.modifier(ResizeMonitor(eventLogger: eventLogger))
     }

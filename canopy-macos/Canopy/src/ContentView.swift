@@ -13,9 +13,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            // The bottom layer is a fullscreen view that displays the rendered frames.
             MetalView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            // (temporary) View printing all events as they happen.
             ScrollView {
                 ScrollViewReader { proxy in
                     VStack(alignment: .leading) {
@@ -34,6 +36,7 @@ struct ContentView: View {
                 }
             }
 
+            // The top layer is transparent and only serves to capture input.
             InputMonitoringView()
                 .onAppear {
                     DispatchQueue.main.async {

@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// A view providing keyboard and mouse input monitoring capabilities.
 struct InputMonitoringView: NSViewRepresentable {
     @EnvironmentObject var eventLogger: EventLogger
 
@@ -15,8 +16,11 @@ struct InputMonitoringView: NSViewRepresentable {
     }
 }
 
+/// The internal view that does the actual input monitoring and logging. This should never be used
+/// directly, but only using the wrapper above.
 class InputMonitoringNSView: NSView {
     private weak var eventLogger: EventLogger?
+    /// Used to capture mouse movements within the frame.
     private var trackingArea: NSTrackingArea?
 
     init(frame frameRect: NSRect, eventLogger: EventLogger) {
@@ -42,6 +46,7 @@ class InputMonitoringNSView: NSView {
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
         
+        // Any previously created tracking area needs to be removed before a new one is created.
         if let trackingArea = trackingArea {
             removeTrackingArea(trackingArea)
         }
@@ -67,7 +72,7 @@ class InputMonitoringNSView: NSView {
         eventLogger?.log(
             "Key Down: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
         )
-        super.keyDown(with: event) // Pass event up the responder chain if needed
+        super.keyDown(with: event)
     }
 
     override func keyUp(with event: NSEvent) {
@@ -77,14 +82,14 @@ class InputMonitoringNSView: NSView {
         eventLogger?.log(
             "Key Up: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
         )
-        super.keyUp(with: event) // Pass event up the responder chain if needed
+        super.keyUp(with: event)
     }
     
 
     override func flagsChanged(with event: NSEvent) {
         let modifiers = event.modifierFlags
         eventLogger?.log("Flags Changed: \(modifiers)")
-        super.flagsChanged(with: event) // Pass event up the responder chain if needed
+        super.flagsChanged(with: event)
     }
 
     // MARK: - Mouse Events
