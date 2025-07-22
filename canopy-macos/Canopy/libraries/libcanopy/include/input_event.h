@@ -1,19 +1,18 @@
 #ifndef INPUT_EVENT_H
 #define INPUT_EVENT_H
 
+#include "input_codes.h"
+#include "util/primitives.h"
+
 // Supported types of input events.
 typedef enum {
-    POINTER_MOVED
+    kKeyDown,
+    kKeyUp
 } EventType;
 
-// The coordinates of a point in 2D space.
+// An event triggered by user input.
 typedef struct {
-    double x;
-    double y;
-} Point2D;
-
-// An event triggered by some type of user input.
-typedef struct {
+    InputCode input_code;
     EventType type;
     Point2D position;
 } InputEvent;

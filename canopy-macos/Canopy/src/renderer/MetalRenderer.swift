@@ -1,6 +1,9 @@
 import SwiftUI
 import MetalKit
 
+/// Size of a single pixel in the frame buffer in bytes.
+private let bytesPerPixel = 4
+
 /// A renderer that uses Metal to render frames provided by the engine to a view.
 class MetalRenderer: NSObject, MTKViewDelegate {
     /// Represents the GPU.
@@ -75,7 +78,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
         guard width > 0 && height > 0 else { return }
         
         // Each pixel is encoded as 4 bytes.
-        let bufferLength = width * height * 4
+        let bufferLength = width * height * bytesPerPixel
         
         // Allocate an MTLBuffer that can be shared with the CPU.
         pixelBuffer = device.makeBuffer(length: bufferLength, options: .storageModeShared)
@@ -127,7 +130,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
             blitEncoder.copy(
                 from: pixelBuffer,
                 sourceOffset: 0,
-                sourceBytesPerRow: renderTexture.width * 4,
+                sourceBytesPerRow: renderTexture.width * bytesPerPixel,
                 sourceBytesPerImage: 0,
                 sourceSize:
                     MTLSize(width: renderTexture.width, height: renderTexture.height, depth: 1),

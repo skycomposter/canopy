@@ -77,25 +77,28 @@ class InputMonitoringNSView: NSView {
     // MARK: - Keyboard Events
 
     override func keyDown(with event: NSEvent) {
-        let characters = event.charactersIgnoringModifiers ?? ""
-        let keyCode = event.keyCode
-        let modifiers = event.modifierFlags
-        eventLogger?.log(
-            "Key Down: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
-        )
+        logKeyEvent(event)
+        if let inputEvent = event.transform() {
+            engine?.onInputEvent(inputEvent)
+        }
         super.keyDown(with: event)
     }
 
     override func keyUp(with event: NSEvent) {
-        let characters = event.charactersIgnoringModifiers ?? ""
-        let keyCode = event.keyCode
-        let modifiers = event.modifierFlags
-        eventLogger?.log(
-            "Key Up: '\(characters)' (keyCode: \(keyCode), modifiers: \(modifiers))"
-        )
+        logKeyEvent(event)
+        if let inputEvent = event.transform() {
+            engine?.onInputEvent(inputEvent)
+        }
         super.keyUp(with: event)
     }
     
+    private func logKeyEvent(_ event: NSEvent) {
+        let characters = event.charactersIgnoringModifiers ?? ""
+        eventLogger?.log(
+            "\(event.getTypeName()): '\(characters)' (keyCode: \(event.keyCode), " +
+                "modifiers: \(event.modifierFlags))"
+        )
+    }
 
     override func flagsChanged(with event: NSEvent) {
         let modifiers = event.modifierFlags
@@ -180,11 +183,6 @@ class InputMonitoringNSView: NSView {
     override func mouseMoved(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
         
-        var inputEvent = InputEvent()
-        inputEvent.type = POINTER_MOVED
-        inputEvent.position = getScaledPosition(location)
-        engine?.onInputEvent(inputEvent)
-        
         eventLogger?.log(
             "Mouse Moved: x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
@@ -204,5 +202,61 @@ class InputMonitoringNSView: NSView {
         scaledPosition.y = position.y * scaleFactor
         
         return scaledPosition
+    }
+}
+
+private extension NSEvent {
+    /// Turns this NSEvent into an InputEvent, mapping event type and input code.
+    func transform() -> InputEvent? {
+        var inputEvent = InputEvent()
+        
+        switch (type) {
+            case .keyDown:
+                inputEvent.type = kKeyDown
+                break
+            case .keyUp:
+                inputEvent.type = kKeyUp
+                break
+            default:
+                // TODO: support more event types.
+                return nil
+        }
+
+        guard let inputCode = getInputCode() else {
+            // Fail if the input code is not recognized.
+            return nil
+        }
+        inputEvent.input_code = inputCode
+        
+        return inputEvent
+    }
+    
+    /// Maps the virtual code for this event's key to the corresponding InputCode.
+    func getInputCode() -> InputCode? {
+        switch (keyCode) {
+            case 123:
+                return kLeftArrow
+            case 124:
+                return kRightArrow
+            case 125:
+                return kBottomArrow
+            case 126:
+                return kUpArrow
+            default:
+                return nil
+        }
+    }
+    
+    /// Provides a readable string for this event's type.
+    func getTypeName() -> String {
+        switch (type) {
+        case .keyDown:
+            return "Key Down"
+        case .keyUp:
+            return "Key Up"
+        default:
+            // TODO: support more event types.
+            return "Event Not Supported (\(type)"
+        }
     }
 }

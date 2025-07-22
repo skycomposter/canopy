@@ -18,11 +18,6 @@
 }
 
 - (void)onInputEvent:(InputEvent)event {
-    if (event.type != POINTER_MOVED) {
-        // Only accept POINTER_MOVED events for now.
-        return;
-    }
-    
     engine.OnInputEvent(event);
 }
 

@@ -2,10 +2,12 @@
 
 #include <algorithm>
 #include <cmath>
-#include <iostream>
 
 #include "input_event.h"
 
+// Size of a single pixel in the frame buffer in bytes.
+const int kBytesPerPixel = 4;
+// Half the length of the default square side.
 const int kSquareHalfDimension = 100;
 
 void CanopyEngine::SetBufferPointer(void *pixel_buffer, size_t size) {
@@ -14,36 +16,43 @@ void CanopyEngine::SetBufferPointer(void *pixel_buffer, size_t size) {
 }
 
 void CanopyEngine::RenderFrame(int width, int height) {
-    if (latest_pointer_position == nullptr) {
-        // Only start drawing once the pointer has entered the window once.
+    if (width * height * kBytesPerPixel != buffer_size) {
+        // TODO: throw some kind of error.
         return;
     }
 
+    // Track the latest requested dimenions.
     frame_width = width;
     frame_height = height;
 
-    DrawSquare(latest_pointer_position->x, latest_pointer_position->y,
-        kSquareHalfDimension);
+    // Move the square based on current input (arrow keys).
+    int center_x = width / 2;
+    int center_y = height / 2;
+    if (input_state_manager[kLeftArrow].is_pressed) {
+        center_x -= 300;
+    }
+    if (input_state_manager[kUpArrow].is_pressed) {
+        center_y -= 300;
+    }
+    if (input_state_manager[kRightArrow].is_pressed) {
+        center_x += 300;
+    }
+    if (input_state_manager[kBottomArrow].is_pressed) {
+        center_y += 300;
+    }
+
+    DrawSquare(center_x, center_y, kSquareHalfDimension);
 }
 
 void CanopyEngine::OnInputEvent(InputEvent event) {
-    if (event.type != POINTER_MOVED) {
-        // Only accept POINTER_MOVED events for now.
-        return;
-    }
-
-    if (latest_pointer_position == nullptr) {
-        latest_pointer_position = new Point2D();
-    }
-    latest_pointer_position->x = event.position.x;
-    latest_pointer_position->y = event.position.y;
+    input_state_manager.OnInputEvent(event);
 }
 
-void CanopyEngine::DrawSquare(int center_x, int center_y, int half_size) {
-    int x0 = center_x - half_size;
-    int y0 = center_y - half_size;
-    int x1 = center_x + half_size;
-    int y1 = center_y + half_size;
+void CanopyEngine::DrawSquare(int center_x, int center_y, int half_dimension) {
+    int x0 = center_x - half_dimension;
+    int y0 = center_y - half_dimension;
+    int x1 = center_x + half_dimension;
+    int y1 = center_y + half_dimension;
 
     unsigned int *pixel = static_cast<unsigned int *>(this->pixel_buffer);
     for (int y = 0; y < frame_height; y++) {
