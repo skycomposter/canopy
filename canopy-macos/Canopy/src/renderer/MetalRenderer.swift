@@ -10,7 +10,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
     let commandQueue: MTLCommandQueue
     
     /// The  engine that actually renders each frame to a buffer.
-    let engine: CanopyEngineBridge
+    private weak var engine: CanopyEngineBridge?
 
     /// The buffer whose underlying data is shared with and written to by the engine.
     private var pixelBuffer: MTLBuffer?
@@ -19,7 +19,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
     private var renderTexture: MTLTexture?
     private var vertexBuffer: MTLBuffer!
 
-    override init() {
+    init(_ engine: CanopyEngineBridge) {
         // Use the Metal framework to create a representation of the GPU.
         guard let defaultDevice = MTLCreateSystemDefaultDevice() else {
             // This should never happen with modern machines. I think.
@@ -28,7 +28,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
 
         self.device = defaultDevice
         self.commandQueue = defaultDevice.makeCommandQueue()!
-        self.engine = CanopyEngineBridge()
+        self.engine = engine
 
         super.init()
             
@@ -82,8 +82,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
         
         // Pass the raw pointer to the engine so it can write to it.
         if let ptr = pixelBuffer?.contents() {
-            engine.setBufferPointer(ptr, withSize: bufferLength)
-            print("C++ pixel buffer pointer set.")
+            engine?.setBufferPointer(ptr, withSize: bufferLength)
         }
         
         let textureDescriptor =
@@ -113,7 +112,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
         }
 
         // 1. Render the frame into the shared pixel buffer.
-        engine.renderFrame(
+        engine?.renderFrame(
             withWidth: Int32(view.drawableSize.width),
             andHeight: Int32(view.drawableSize.height),
         )

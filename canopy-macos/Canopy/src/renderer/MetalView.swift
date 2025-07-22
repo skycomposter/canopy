@@ -3,8 +3,10 @@ import MetalKit
 
 /// A view whose content is rendered using Metal.
 struct MetalView: NSViewRepresentable {
+    @EnvironmentObject var engineWrapper: CanopyEngineWrapper
+    
     func makeCoordinator() -> MetalRenderer {
-        MetalRenderer()
+        MetalRenderer(engineWrapper.engine)
     }
 
     func makeNSView(context: Context) -> MTKView {

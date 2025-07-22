@@ -2,11 +2,13 @@ import SwiftUI
 
 /// A view providing keyboard and mouse input monitoring capabilities.
 struct InputMonitoringView: NSViewRepresentable {
+    @EnvironmentObject var engineWrapper: CanopyEngineWrapper
     @EnvironmentObject var eventLogger: EventLogger
 
     func makeNSView(context: Context) -> some NSView {
         return InputMonitoringNSView(
             frame: .zero,
+            engine: engineWrapper.engine,
             eventLogger: eventLogger,
         )
     }
@@ -19,13 +21,22 @@ struct InputMonitoringView: NSViewRepresentable {
 /// The internal view that does the actual input monitoring and logging. This should never be used
 /// directly, but only using the wrapper above.
 class InputMonitoringNSView: NSView {
+    private weak var engine: CanopyEngineBridge?
     private weak var eventLogger: EventLogger?
-    /// Used to capture mouse movements within the frame.
+    // Used to capture mouse movements within the frame.
     private var trackingArea: NSTrackingArea?
+    
+    // By default, macOS uses the bottom-left corner as the origin of its coordinate space.
+    // Overriding this field allows us to use the top-left, comforming to the project-wide
+    // default.
+    override var isFlipped: Bool {
+            return true
+        }
 
-    init(frame frameRect: NSRect, eventLogger: EventLogger) {
+    init(frame frameRect: NSRect, engine: CanopyEngineBridge, eventLogger: EventLogger) {
+        self.engine = engine
         self.eventLogger = eventLogger
-        
+
         super.init(frame: frameRect)
 
         // Ensure the view can become first responder to receive key events.
@@ -168,10 +179,30 @@ class InputMonitoringNSView: NSView {
     
     override func mouseMoved(with event: NSEvent) {
         let location = convert(event.locationInWindow, from: nil)
+        
+        var inputEvent = InputEvent()
+        inputEvent.type = POINTER_MOVED
+        inputEvent.position = getScaledPosition(location)
+        engine?.onInputEvent(inputEvent)
+        
         eventLogger?.log(
             "Mouse Moved: x=\(String(format: "%.1f", location.x)), " +
                 "y=\(String(format: "%.1f", location.y))"
         )
         super.mouseMoved(with: event)
+    }
+    
+    /// Takes a window position in points and turns it into its equivalent in pixels.
+    private func getScaledPosition(_ position: NSPoint) -> Point2D {
+        var scaleFactor = 1.0
+        if let window = self.window {
+            scaleFactor = window.backingScaleFactor
+        }
+        
+        var scaledPosition = Point2D()
+        scaledPosition.x = position.x * scaleFactor
+        scaledPosition.y = position.y * scaleFactor
+        
+        return scaledPosition
     }
 }

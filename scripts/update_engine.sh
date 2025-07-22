@@ -19,6 +19,7 @@ update_macos() {
     make -C "$ENGINE_DIR"
     # Copy the headers and compiled library to the macOS project.
     cp "$ENGINE_DIR/src/canopy_engine.h" "$MACOS_DIR/Canopy/libraries/libcanopy/include/"
+    cp "$ENGINE_DIR/src/input_event.h" "$MACOS_DIR/Canopy/libraries/libcanopy/include/"
     cp "$ENGINE_DIR/out/libcanopy.a" "$MACOS_DIR/Canopy/libraries/libcanopy/lib/"
 }
 

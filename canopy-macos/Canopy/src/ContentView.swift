@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var engineWrapper = CanopyEngineWrapper()
     @StateObject private var eventLogger: EventLogger
-    
+
     private var windowEventMonitor: WindowEventMonitor
     
     init() {
@@ -12,7 +13,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             // The bottom layer is a fullscreen view that displays the rendered frames.
             MetalView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -35,6 +36,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .frame(maxHeight: 200)
 
             // The top layer is transparent and only serves to capture input.
             InputMonitoringView()
@@ -51,6 +53,7 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .resizeMonitor(eventLogger: eventLogger)
+        .environmentObject(engineWrapper)
         .environmentObject(eventLogger)
     }
 }

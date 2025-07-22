@@ -2,7 +2,7 @@ libcanopy.a : canopy_engine.o
 	ar rcs out/libcanopy.a out/canopy_engine.o
 	rm -f out/canopy_engine.o
 
-canopy_engine.o: src/canopy_engine.cc src/canopy_engine.h
+canopy_engine.o: src/canopy_engine.cc src/canopy_engine.h src/input_event.h
 	 g++ -c src/canopy_engine.cc -o out/canopy_engine.o
 
 clean :

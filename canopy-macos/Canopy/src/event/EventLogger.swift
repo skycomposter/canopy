@@ -4,7 +4,7 @@ import SwiftUI
 class EventLogger: ObservableObject {
     @Published var events: [String] = []
     
-    private let eventLimit = 100
+    private let eventLimit = 50
     
     /// Posts a new event to be recorded.
     ///
