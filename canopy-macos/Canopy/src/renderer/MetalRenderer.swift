@@ -1,4 +1,3 @@
-import SwiftUI
 import MetalKit
 
 /// Size of a single pixel in the frame buffer in bytes.

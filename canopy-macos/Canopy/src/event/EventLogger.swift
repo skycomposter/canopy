@@ -1,5 +1,3 @@
-import SwiftUI
-
 /// A logger that stores and publishes a series of events for development and debugging purposes.
 class EventLogger: ObservableObject {
     @Published var events: [String] = []

@@ -1,5 +1,5 @@
-import SwiftUI
 import MetalKit
+import SwiftUI
 
 /// A view whose content is rendered using Metal.
 struct MetalView: NSViewRepresentable {
