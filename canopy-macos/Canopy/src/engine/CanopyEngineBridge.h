@@ -18,8 +18,11 @@
  *
  * @param width The width of the frame in pixels.
  * @param height The height of the frame in pixels.
+ * @param frameInterval The assumed frame interval in seconds.
  */
-- (void)renderFrameWithWidth:(int)width andHeight:(int)height;
+- (void)renderFrameWithWidth:(int)width
+                   andHeight:(int)height
+               frameInterval:(double)frameInterval;
 
 /** Processes an input event and updates the internal state accordingly. */
 - (void)onInputEvent:(InputEvent)event;

@@ -15,7 +15,7 @@ void CanopyEngine::SetBufferPointer(void *pixel_buffer, size_t size) {
     this->buffer_size = size;
 }
 
-void CanopyEngine::RenderFrame(int width, int height) {
+void CanopyEngine::RenderFrame(int width, int height, double frameInterval) {
     if (width * height * kBytesPerPixel != buffer_size) {
         // TODO: throw some kind of error.
         return;

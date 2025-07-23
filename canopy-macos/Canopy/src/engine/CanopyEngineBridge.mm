@@ -13,8 +13,10 @@
     engine.SetBufferPointer(pixelBuffer, size);
 }
 
-- (void)renderFrameWithWidth:(int)width andHeight:(int)height {
-    engine.RenderFrame(width, height);
+- (void)renderFrameWithWidth:(int)width
+                   andHeight:(int)height
+               frameInterval:(double)frameInterval {
+    engine.RenderFrame(width, height, frameInterval);
 }
 
 - (void)onInputEvent:(InputEvent)event {

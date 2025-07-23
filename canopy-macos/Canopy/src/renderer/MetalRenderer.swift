@@ -9,7 +9,10 @@ class MetalRenderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
     
     /// Queue used to post commands to the device.
-    let commandQueue: MTLCommandQueue
+    private let commandQueue: MTLCommandQueue
+    
+    /// Used to measure performance (e.g frame interval) and provide it when needed.
+    private let performanceMonitor: PerformanceMonitor
     
     /// The  engine that actually renders each frame to a buffer.
     private weak var engine: CanopyEngineBridge?
@@ -30,6 +33,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
 
         self.device = defaultDevice
         self.commandQueue = defaultDevice.makeCommandQueue()!
+        self.performanceMonitor = PerformanceMonitor()
         self.engine = engine
 
         super.init()
@@ -107,6 +111,9 @@ class MetalRenderer: NSObject, MTKViewDelegate {
 
     /// Called for each frame to generate and draw a frame to the view.
     func draw(in view: MTKView) {
+        // Make sure that the measured frame interval is up-to-date.
+        performanceMonitor.onFrameStart()
+        
         // Make sure that the view is set up correctly, or we will crash.
         guard let drawable = view.currentDrawable,
               let renderPassDescriptor = view.currentRenderPassDescriptor else {
@@ -117,6 +124,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
         engine?.renderFrame(
             withWidth: Int32(view.drawableSize.width),
             andHeight: Int32(view.drawableSize.height),
+            frameInterval: performanceMonitor.frameInterval,
         )
         
         // 2. Create a command buffer.

@@ -18,7 +18,7 @@ public:
 
     // Renders a frame from the current internal state and writes it to the
     // buffer.
-    void RenderFrame(int width, int height);
+    void RenderFrame(int width, int height, double frameInterval);
 
 private:
     // Shared frame buffer in which frames are rendered.
