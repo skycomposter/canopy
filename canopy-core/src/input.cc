@@ -4,6 +4,7 @@
 
 #include "input_codes.h"
 #include "input_event.h"
+#include "util/primitives.h"
 
 // Utility vector used to easily initialize data structures using all the
 // values of InputCode. Contents must always match those values.
@@ -11,7 +12,7 @@ const std::vector<InputCode> input_codes = {
     kLeftArrow,
     kUpArrow,
     kRightArrow,
-    kBottomArrow
+    kDownArrow
 };
 
 InputState InputStateManager::operator[](InputCode input_code) {

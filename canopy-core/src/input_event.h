@@ -1,5 +1,5 @@
-#ifndef INPUT_EVENT_H
-#define INPUT_EVENT_H
+#ifndef INPUT_EVENT_H_
+#define INPUT_EVENT_H_
 
 #include "input_codes.h"
 #include "util/primitives.h"
@@ -17,4 +17,4 @@ typedef struct {
     Point2D position;
 } InputEvent;
 
-#endif // INPUT_EVENT_H
+#endif  // INPUT_EVENT_H_

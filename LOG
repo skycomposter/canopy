@@ -1,11 +1,22 @@
+25.7.23
+Added performance calculations to get the interval between frames, and started using to calculate
+movement speed. Now I can have constant and uniform movement when keys are pressed, regardless of
+window size and frame rate. This also required drawing the moving rectangle using position and size
+relative to the window size instead of absolute.
+- Accomplishments: instead of just picking between 9 static positions based on input, the rectangle
+  moves around and updates its persistent state so it can be "driven" around the window.
+
 25.7.22
 Worked on input event piping. I'm not 100% confident on the timing and synchronization, but it
 seems to work so far. Still no GPU rendering -- that'll come soon.
 - Accomplishments: rendered square controlled by inputs (mouse and key presses).
 
 25.7.21
-Got a lot done today. Got the C++ engine connected to the macOS platform code and moved the frame rendering code there. However I couldn't figure out a way to compile and build everything together, so I had to build the engine first and then copy the header and library over every time. I created a Makefile to make the library build easier, and then wrote a script to automatically
-update the library within the macOS project.
+Got a lot done today. Got the C++ engine connected to the macOS platform code and moved the frame
+rendering code there. However I couldn't figure out a way to compile and build everything together,
+so I had to build the engine first and then copy the header and library over every time. I created
+a Makefile to make the library build easier, and then wrote a script to automatically update the
+library within the macOS project.
 - Accomplishments: C++-side rendering and streamlined build system.
 
 25.7.20

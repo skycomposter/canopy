@@ -1,5 +1,5 @@
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef INPUT_H_
+#define INPUT_H_
 
 #include <mutex>
 #include <unordered_map>
@@ -43,4 +43,4 @@ private:
     void InitStates();
 };
 
-#endif // INPUT_H
+#endif  // INPUT_H_

@@ -239,7 +239,7 @@ private extension NSEvent {
             case 124:
                 return kRightArrow
             case 125:
-                return kBottomArrow
+                return kDownArrow
             case 126:
                 return kUpArrow
             default:
