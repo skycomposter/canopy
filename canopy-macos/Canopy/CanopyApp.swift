@@ -10,9 +10,12 @@ struct CanopyApp: App {
                 .frame(
                     minWidth: 800,
                     idealWidth: 800,
-                    minHeight: 600,
-                    idealHeight: 600,
+                    maxWidth: 800,
+                    minHeight: 400,
+                    idealHeight: 400,
+                    maxHeight: 400,
                 )
         }
+        .windowResizability(.contentSize)
     }
 }

@@ -12,8 +12,6 @@
 // A game engine that renders frames to a provided buffer.
 class CanopyEngine {
 public:
-    CanopyEngine();
-
     // Provides a valid buffer and its size to the engine.
     void SetBufferPointer(void *pixel_buffer, size_t size);
 
@@ -36,13 +34,17 @@ private:
     int frame_width = 0;
     // Height of the next requested frame.
     int frame_height = 0;
-    // The current center of the moving rectangle, expressed as a percentage of
-    // the frame's width and height.
-    Point2D rect_position;
+    // The current center position of the ball, expressed as a percentage of
+    // the frame's dimensions.
+    Point2D ball_position = {-1, -1};
 
-    // Draws a rectangle with the given center position, half dimensions, and
-    // color.
-    void DrawRect(Point2D position, Size2D half_dimensions, Color color);
+
+    // Draws a rectangle with the given center position, dimensions, and color.
+    void DrawRectAbsolute(Point2D position, Size2D dimensions, Color color);
+    // Draws a rectangle with the given center position and dimensions
+    // (expressed as percentages of the frame dimensions), and color of the
+    // frame.
+    void DrawRectRelative(Point2D position, Size2D dimensions, Color color);
 
     // Draws a rectangle with the given bounds and color.
     void DrawRectWithBounds(int left, int top, int right, int bottom,

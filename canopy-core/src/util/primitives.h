@@ -16,4 +16,10 @@ typedef struct {
     double height;
 } Size2D;
 
+// The velocity of a 2D object.
+typedef struct {
+    double x;
+    double y;
+} Velocity2D;
+
 #endif  // PRIMITIVES_H_
