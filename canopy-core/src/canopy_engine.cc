@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cmath>
 
-#include "input.h"
-#include "input_event.h"
+#include "input/input.h"
+#include "input/input_event.h"
 #include "util/primitives.h"
 #include "util/utils.h"
 
@@ -28,7 +28,8 @@ void CanopyEngine::SetBufferPointer(void *pixel_buffer, size_t size) {
     this->buffer_size = size;
 }
 
-void CanopyEngine::RenderFrame(int width, int height, double frameInterval) {
+void CanopyEngine::RenderFrame(unsigned long width, unsigned long height,
+                               double frameInterval) {
     if (width * height * kBytesPerPixel != buffer_size) {
         // TODO: throw some kind of error.
         return;

@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "input_codes.h"
-#include "input_event.h"
+#include "input/input_codes.h"
+#include "input/input_event.h"
 #include "util/primitives.h"
 
 // Utility vector used to easily initialize data structures using all the

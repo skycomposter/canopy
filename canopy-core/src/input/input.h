@@ -4,8 +4,8 @@
 #include <mutex>
 #include <unordered_map>
 
-#include "input_codes.h"
-#include "input_event.h"
+#include "input/input_codes.h"
+#include "input/input_event.h"
 #include "util/primitives.h"
 
 // Current state of a single input (mouse, keyboard key, or controller button).

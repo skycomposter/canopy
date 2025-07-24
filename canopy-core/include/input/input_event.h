@@ -1,7 +1,7 @@
 #ifndef INPUT_EVENT_H_
 #define INPUT_EVENT_H_
 
-#include "input_codes.h"
+#include "input/input_codes.h"
 #include "util/primitives.h"
 
 // Supported types of input events.

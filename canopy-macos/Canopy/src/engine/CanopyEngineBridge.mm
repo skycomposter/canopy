@@ -1,7 +1,7 @@
 #import "CanopyEngineBridge.h"
 
 #include "canopy_engine.h"
-#include "input_event.h"
+#include "input/input_event.h"
 
 @implementation CanopyEngineBridge {
     /** The internal engine instance that fulfills the requests received by this bridge. */
@@ -16,7 +16,9 @@
 - (void)renderFrameWithWidth:(int)width
                    andHeight:(int)height
                frameInterval:(double)frameInterval {
-    engine.RenderFrame(width, height, frameInterval);
+    engine.RenderFrame(
+        (unsigned long) width, (unsigned long) height, frameInterval
+    );
 }
 
 - (void)onInputEvent:(InputEvent)event {

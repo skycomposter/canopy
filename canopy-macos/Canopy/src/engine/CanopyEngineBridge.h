@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#include "input_event.h"
+#include "input/input_event.h"
 
 /** A bridge class allowing us access to the engine's C++ APIs from this SwiftUI project. */
 @interface CanopyEngineBridge : NSObject

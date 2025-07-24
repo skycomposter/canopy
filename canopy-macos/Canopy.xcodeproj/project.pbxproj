@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		917617442E3291FB00228DF1 /* libcanopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 917617432E3291FB00228DF1 /* libcanopy.a */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		91881F082E29AA62003333C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		917617432E3291FB00228DF1 /* libcanopy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcanopy.a; path = "../canopy-core/lib/libcanopy.a"; sourceTree = "<group>"; };
 		91881EF92E29AA61003333C3 /* Canopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91881F072E29AA62003333C3 /* CanopyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanopyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91881F112E29AA62003333C3 /* CanopyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanopyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				917617442E3291FB00228DF1 /* libcanopy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +78,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		917617422E3291FB00228DF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				917617432E3291FB00228DF1 /* libcanopy.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		91881EF02E29AA61003333C3 = {
 			isa = PBXGroup;
 			children = (
 				91881EFB2E29AA61003333C3 /* Canopy */,
 				91881F0A2E29AA62003333C3 /* CanopyTests */,
 				91881F142E29AA62003333C3 /* CanopyUITests */,
+				917617422E3291FB00228DF1 /* Frameworks */,
 				91881EFA2E29AA61003333C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -323,14 +338,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Canopy/libraries/libcanopy/include";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Canopy/libraries/libcanopy/lib";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../canopy-core/lib";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../canopy-core/include/**",
+					"$(PROJECT_DIR)/../canopy-core/src/**",
+				);
 			};
 			name = Debug;
 		};
@@ -381,12 +400,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Canopy/libraries/libcanopy/include";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Canopy/libraries/libcanopy/lib";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../canopy-core/lib";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				USER_HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../canopy-core/include/**",
+					"$(PROJECT_DIR)/../canopy-core/src/**",
+				);
 			};
 			name = Release;
 		};
@@ -414,11 +437,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Canopy/libraries/libcanopy/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../canopy-core/lib";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gg.skycomp.Canopy;
@@ -459,11 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Canopy/libraries/libcanopy/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../canopy-core/lib";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gg.skycomp.Canopy;

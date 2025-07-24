@@ -1,2 +1,2 @@
-canopy-core/out/*
-canopy-macos/Canopy/libraries/libcanopy/lib/*
+canopy-core/**/*.a
+canopy-core/**/*.o

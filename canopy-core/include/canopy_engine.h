@@ -5,8 +5,8 @@
 
 #include <queue>
 
-#include "input.h"
-#include "input_event.h"
+#include "input/input.h"
+#include "input/input_event.h"
 #include "util/primitives.h"
 
 // A game engine that renders frames to a provided buffer.
@@ -20,7 +20,8 @@ public:
 
     // Renders a frame from the current internal state and writes it to the
     // buffer.
-    void RenderFrame(int width, int height, double frameInterval);
+    void RenderFrame(unsigned long width, unsigned long height,
+                     double frameInterval);
 
 private:
     // Bookkeeping for user input.

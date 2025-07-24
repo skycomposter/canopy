@@ -1,17 +1,27 @@
-libcanopy.a : canopy_engine.o input.o utils.o
-	ar rcs out/libcanopy.a out/canopy_engine.o out/input.o out/utils.o
-	rm -f out/canopy_engine.o out/input.o out/utils.o
+# General compilation flags.
+CXXFLAGS = -Wall -Wextra -std=c++17
+# Flags that make sure all headers can be found correctly.
+CPPFLAGS = -I./include -I./src
 
-canopy_engine.o: src/canopy_engine.cc src/canopy_engine.h src/input.h \
-				 src/input_event.h src/util/primitives.h src/util/utils.h
-	g++ -c src/canopy_engine.cc -o out/canopy_engine.o
+# All .cc files.
+SRCS = src/canopy_engine.cc src/input/input.cc src/util/utils.cc
+# One .o file for each .cc file.
+OBJS = $(SRCS:.cc=.o)
+# The built library binary.
+BINARY = lib/libcanopy.a
 
-input.o: src/input.cc src/input.h src/input_codes.h src/input_event.h \
-		 src/util/primitives.h
-	g++ -c src/input.cc -o out/input.o
+# Builds the binary and cleans up the intermediate object files.
+lib: $(BINARY)
+	rm -f $(OBJS)
 
-utils.o: src/util/utils.cc src/util/utils.h
-	g++ -c src/util/utils.cc -o out/utils.o
+# Builds the library and all intermediate files.
+$(BINARY): $(OBJS)
+	ar rcs $(BINARY) $(OBJS)
 
-clean :
-	rm -f out/libcanopy.a out/canopy_engine.o out/input.o
+# Sets up a .o target for any .cc file in the project 
+%.o: %.cc
+	g++ $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
+
+# Remove both binary and intermediate object files.
+clean:
+	rm -f $(OBJS) $(BINARY)

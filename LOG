@@ -1,3 +1,8 @@
+25.7.24
+Learned about CMakeLists as well as more efficient ways of linkng the macOS project with the core
+library. Also made some improvements to the engine to make it look nicer.
+- Accomplishments: much cleaner project structure and faster iteration speed.
+
 25.7.23
 Added performance calculations to get the interval between frames, and started using to calculate
 movement speed. Now I can have constant and uniform movement when keys are pressed, regardless of
