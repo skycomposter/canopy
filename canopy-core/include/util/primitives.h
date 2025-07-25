@@ -1,6 +1,8 @@
 #ifndef PRIMITIVES_H_
 #define PRIMITIVES_H_
 
+#include <stdint.h>
+
 // All colors project-wide are expressed as 32-bit unsigned ints.
 typedef uint32_t Color;
 

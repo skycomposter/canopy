@@ -36,7 +36,6 @@ public:
 private:
     // Source of truth for the latest state of user input.
     std::unordered_map<InputCode, InputState> states;
-    // Guards input_states.
     std::mutex states_mutex;
 
     // Initialize the internal state with default values.

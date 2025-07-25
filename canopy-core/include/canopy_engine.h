@@ -1,12 +1,12 @@
 #ifndef CANOPY_ENGINE_H_
 #define CANOPY_ENGINE_H_
 
-#include <stddef.h>
-
 #include <queue>
+#include <stddef.h>
 
 #include "input/input.h"
 #include "input/input_event.h"
+#include "state/game_state.h"
 #include "util/primitives.h"
 
 // A game engine that renders frames to a provided buffer.
@@ -21,9 +21,11 @@ public:
     // Renders a frame from the current internal state and writes it to the
     // buffer.
     void RenderFrame(unsigned long width, unsigned long height,
-                     double frameInterval);
+                     double frame_interval);
 
 private:
+    // Bookkeeping for the game state.
+    GameState game_state;
     // Bookkeeping for user input.
     InputStateManager input_state_manager;
 
@@ -32,12 +34,9 @@ private:
     // Allocated size of the pixel_buffer.
     size_t buffer_size = 0;
     // Width of the next requested frame.
-    int frame_width = 0;
+    unsigned long frame_width = 0;
     // Height of the next requested frame.
-    int frame_height = 0;
-    // The current center position of the ball, expressed as a percentage of
-    // the frame's dimensions.
-    Point2D ball_position = {-1, -1};
+    unsigned long frame_height = 0;
 
     // Draws a rectangle with the given center position, dimensions, and color.
     void DrawRectAbsolute(Point2D position, Size2D dimensions, Color color);

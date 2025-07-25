@@ -1,3 +1,11 @@
+25.7.25
+Short and sweet today. I reorganized the code a bit to avoid bloat of the main engine class. I also
+noticed that I was getting a beep every time I used a key, especially if I held it down. It turns
+out that if the framework (SwiftUI/AppKit) doesn't interpret a key as handled, the system will play
+that sound by default. By not propagating the keyDown event (i.e. not calling super.keyDown) the
+beep is gone.
+- Accomplishments: no more beep!
+
 25.7.24
 Learned about CMakeLists as well as more efficient ways of linkng the macOS project with the core
 library. Also made some improvements to the engine to make it look nicer.

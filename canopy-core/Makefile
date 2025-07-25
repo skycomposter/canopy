@@ -4,7 +4,8 @@ CXXFLAGS = -Wall -Wextra -std=c++17
 CPPFLAGS = -I./include -I./src
 
 # All .cc files.
-SRCS = src/canopy_engine.cc src/input/input.cc src/util/utils.cc
+SRCS = src/canopy_engine.cc src/input/input.cc src/state/game_state.cc \
+       src/util/utils.cc
 # One .o file for each .cc file.
 OBJS = $(SRCS:.cc=.o)
 # The built library binary.

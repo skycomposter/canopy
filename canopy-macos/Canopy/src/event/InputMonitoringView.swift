@@ -81,7 +81,6 @@ class InputMonitoringNSView: NSView {
         if let inputEvent = event.transform() {
             engine?.onInputEvent(inputEvent)
         }
-        super.keyDown(with: event)
     }
 
     override func keyUp(with event: NSEvent) {
