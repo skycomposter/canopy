@@ -233,6 +233,8 @@ private extension NSEvent {
     /// Maps the virtual code for this event's key to the corresponding InputCode.
     func getInputCode() -> InputCode? {
         switch (keyCode) {
+            case 49:
+                return kSpacebar
             case 123:
                 return kLeftArrow
             case 124:

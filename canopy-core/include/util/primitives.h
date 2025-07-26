@@ -18,6 +18,9 @@ typedef struct {
     double height;
 } Size2D;
 
+// Absolute speed value used to calculate velocities.
+typedef uint32_t Speed;
+
 // The velocity of a 2D object.
 typedef struct {
     double x;

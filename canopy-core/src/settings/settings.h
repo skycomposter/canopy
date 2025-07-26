@@ -7,12 +7,17 @@
 const Color kArenaColor = 0xFF000000;
 const Color kBallColor = 0xFF00FF00;
 const Color kBorderColor = 0xFF00FF00;
+const Color kPlayerColor = 0xFF00FF00;
 
 // Arena settings
 const Size2D kBorderSize = {30, 30};
 
 // Ball settings.
 const Size2D kBallSize = {32, 32};
-const Velocity2D kBallVelocity = {800, 800};
+const Speed kBallSpeed = 800;
+
+// Player settings.
+const Size2D kPlayerSize = {32, 128};
+const Speed kPlayerSpeed = 800;
 
 #endif  // SETTINGS_H_

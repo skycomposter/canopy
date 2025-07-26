@@ -1,5 +1,6 @@
 #include "input.h"
 
+#include <iostream>
 #include <vector>
 
 #include "input/input_codes.h"
@@ -9,6 +10,7 @@
 // Utility vector used to easily initialize data structures using all the
 // values of InputCode. Contents must always match those values.
 const std::vector<InputCode> input_codes = {
+    kSpacebar,
     kLeftArrow,
     kUpArrow,
     kRightArrow,

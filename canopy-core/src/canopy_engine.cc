@@ -38,6 +38,10 @@ void CanopyEngine::RenderFrame(unsigned long width, unsigned long height,
         kBorderSize.width, kBorderSize.height, frame_width - kBorderSize.width,
         frame_height - kBorderSize.height, kArenaColor);
     DrawRectAbsolute(game_state.GetBallPosition(), kBallSize, kBallColor);
+    DrawRectAbsolute(
+        game_state.GetPlayerPosition(0), kPlayerSize, kPlayerColor);
+    DrawRectAbsolute(
+        game_state.GetPlayerPosition(1), kPlayerSize, kPlayerColor);
 }
 
 void CanopyEngine::OnInputEvent(InputEvent event) {
