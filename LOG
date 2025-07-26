@@ -1,3 +1,12 @@
+25.7.26
+The game is taking the shape of Pong. Today it was mostly a lot of refactoring both for
+architecture and code style. We should be in decent shape now. I do hate C++ imports though, and
+how you could be importing stuff through some header other so your file doesn't have all the
+necessary, and then it bites you in the ass later on. There must be some linter to check this, but
+I've been too lazy to check so far.
+- Accomplishments: ball starts moving in a random direction when I press the spacebar and it
+  bounces off the walls forever.
+
 25.7.25
 Short and sweet today. I reorganized the code a bit to avoid bloat of the main engine class. I also
 noticed that I was getting a beep every time I used a key, especially if I held it down. It turns

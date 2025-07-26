@@ -11,7 +11,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
   /// Queue used to post commands to the device.
   private let commandQueue: MTLCommandQueue
   
-  /// Used to measure performance (e.g frame interval) and provide it when needed.
+  /// Used to measure performance (e.g delta time) and provide it when needed.
   private let performanceMonitor: PerformanceMonitor
   
   /// The  engine that actually renders each frame to a buffer.
@@ -107,7 +107,7 @@ class MetalRenderer: NSObject, MTKViewDelegate {
 
   /// Called for each frame to generate and draw a frame to the view.
   func draw(in view: MTKView) {
-    // Make sure that the measured frame interval is up-to-date.
+    // Make sure that the delta time is up-to-date.
     performanceMonitor.onFrameStart()
     
     // Make sure that the view is set up correctly, or we will crash.
@@ -118,9 +118,9 @@ class MetalRenderer: NSObject, MTKViewDelegate {
 
     // 1. Render the frame into the shared pixel buffer.
     engine?.renderFrame(
-      withWidth: Int32(view.drawableSize.width),
-      andHeight: Int32(view.drawableSize.height),
-      frameInterval: performanceMonitor.frameInterval)
+      withWidth: view.drawableSize.width,
+      andHeight: view.drawableSize.height,
+      deltaTime: performanceMonitor.deltaTime)
     
     // 2. Create a command buffer.
     let commandBuffer = commandQueue.makeCommandBuffer()!

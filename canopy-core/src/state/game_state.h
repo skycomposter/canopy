@@ -11,10 +11,9 @@ class GameState {
   Point2D GetPlayerPosition(unsigned int player) const;
 
   // Updates the state of the game based on current input state, frame
-  // dimensions, and frame interval.
-  void Update(InputStateManager *input_state_manager,
-              unsigned long frame_width, unsigned long frame_height,
-              double frame_interval);
+  // dimensions, and delta time.
+  void Update(InputStateManager *input_state_manager, Size2D frame_size,
+              double delta_time);
 
  private:
   Point2D ball_position = {-1, -1};

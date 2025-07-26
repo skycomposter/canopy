@@ -12,6 +12,7 @@ target_include_directories(libcanopy PRIVATE ${CMAKE_SOURCE_DIR}/src)
 add_library(libcanopy STATIC
     src/canopy_engine.cc
     src/input/input.cc
+    src/renderer/renderer.cc
     src/state/game_state.cc
     src/util/utils.cc
 )

@@ -18,11 +18,11 @@
  *
  * @param width The width of the frame in pixels.
  * @param height The height of the frame in pixels.
- * @param frameInterval The assumed frame interval in seconds.
+ * @param deltaTime Seconds elapsed between the previous and current frame.
  */
-- (void)renderFrameWithWidth:(int)width
-                   andHeight:(int)height
-               frameInterval:(double)frameInterval;
+- (void)renderFrameWithWidth:(double)width
+                   andHeight:(double)height
+                   deltaTime:(double)deltaTime;
 
 /** Processes an input event and updates the internal state accordingly. */
 - (void)onInputEvent:(InputEvent)event;
