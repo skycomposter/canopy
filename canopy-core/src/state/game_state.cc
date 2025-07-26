@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cstdlib>
+#include <ctime>
 
 #include "input/input.h"
 #include "input/input_codes.h"
@@ -40,7 +41,8 @@ void GameState::Update(InputStateManager *input_state_manager,
       && (*input_state_manager)[kSpacebar].is_pressed) {
     // If the game has not started yet and the spacebar is pressed, give the
     // ball a random starting velocity.
-    int angle = std::rand() % 360;
+    std::srand(std::time(0));
+    int angle = std::rand() % 400; // radians
     ball_velocity =
       {kBallSpeed * std::cos(angle), kBallSpeed * std::sin(angle)};
   } else {

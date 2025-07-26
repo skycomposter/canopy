@@ -1,6 +1,5 @@
 #include "input.h"
 
-#include <iostream>
 #include <vector>
 
 #include "input/input_codes.h"
