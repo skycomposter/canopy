@@ -8,14 +8,14 @@ typedef uint32_t Color;
 
 // The coordinates of a point in 2D space.
 typedef struct {
-    double x;
-    double y;
+  double x;
+  double y;
 } Point2D;
 
 // The rectangular dimensions of a 2D object.
 typedef struct {
-    double width;
-    double height;
+  double width;
+  double height;
 } Size2D;
 
 // Absolute speed value used to calculate velocities.
@@ -23,8 +23,8 @@ typedef uint32_t Speed;
 
 // The velocity of a 2D object.
 typedef struct {
-    double x;
-    double y;
+  double x;
+  double y;
 } Velocity2D;
 
 #endif  // PRIMITIVES_H_

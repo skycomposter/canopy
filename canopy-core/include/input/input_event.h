@@ -6,15 +6,15 @@
 
 // Supported types of input events.
 typedef enum {
-    kKeyDown,
-    kKeyUp
+  kKeyDown,
+  kKeyUp
 } EventType;
 
 // An event triggered by user input.
 typedef struct {
-    InputCode input_code;
-    EventType type;
-    Point2D position;
+  InputCode input_code;
+  EventType type;
+  Point2D position;
 } InputEvent;
 
 #endif  // INPUT_EVENT_H_
