@@ -1,3 +1,10 @@
+25.7.28
+Went back to work so progress will slow. Today I added some nice movement to the players with
+acceleraton and friction, though it does need some tuning. Ball is still moving of its own accord
+without any consideration for player position, so I'll need to add that soon. Dabbled with some
+motion equations -- such memories!
+- Accomplishments: added nice smooth movements to the players based on user input.
+
 25.7.26
 The game is taking the shape of Pong. Today it was mostly a lot of refactoring both for
 architecture and code style. We should be in decent shape now. I do hate C++ imports though, and

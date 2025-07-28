@@ -28,7 +28,6 @@ class Renderer {
   // as percentages of the frame dimensions), and color of the frame.
   void DrawRectRelative(Point2D position, Size2D size, Size2D frame_size,
                         Color color);
-
   // Draws a rectangle with the given bounds and color.
   void DrawRectWithBounds(int left, int top, int right, int bottom,
                           Size2D frame_size, Color color);

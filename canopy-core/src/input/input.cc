@@ -6,16 +6,6 @@
 #include "input/input_event.h"
 #include "util/primitives.h"
 
-// Utility vector used to easily initialize data structures using all the
-// values of InputCode. Contents must always match those values.
-const std::vector<InputCode> input_codes = {
-  kSpacebar,
-  kLeftArrow,
-  kUpArrow,
-  kRightArrow,
-  kDownArrow
-};
-
 InputState InputStateManager::operator[](InputCode input_code) {
   states_mutex.lock();
   // Return a copy so the stored value can't get messed with.

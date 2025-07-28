@@ -17,6 +17,7 @@ const Size2D kBallSize = {32, 32};
 const Speed kBallSpeed = 800;
 
 // Player settings.
+const int kPlayerCount = 2;
 const Size2D kPlayerSize = {32, 128};
 const Speed kPlayerSpeed = 800;
 
